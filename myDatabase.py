@@ -77,7 +77,7 @@ def initDatabase1():
     tmp_product = Product.create(name = "product1", praise = 999999, store = tmp_store)
     tmp_storage = Storage.create(adress = "fantasy", product = tmp_product)
     tmp_supply = Supply.create(product = tmp_product, count = 1, date = datetime.datetime(2024, 10, 1, 12, 24))
-    #tmp_supply = Supply.create(product = tmp_product, count = 111, date = datetime.datetime(2026, 10, 1, 12, 24))
+    tmp_supply = Supply.create(product = tmp_product, count = 111, date = datetime.datetime(2026, 10, 1, 12, 24))
     tmp_product = Product.create(name = "product2", praise = 100000*1000000, store = tmp_store)
     tmp_storage = Storage.create(adress = "Lenina 2", product = tmp_product)
     tmp_rate = Rate.create(author = "Petrov", stars = 3, product = tmp_product)
@@ -128,7 +128,7 @@ class MyDataBase:
 
     def first(self, name):
         tmp = [(str(i.date), i.count) for i in Supply.select().join(Product).where(Product.name == name)]
-        #tmp.append(("all", Supply.select(fn.SUM(Supply.count)).join(Product).where(Product.name == name).scalar()))
+        tmp.append(("all", Supply.select(fn.SUM(Supply.count)).join(Product).where(Product.name == name).scalar()))
         return MyModel(tmp, ["Дата поставки '"+name+"'", "количество"])
 
     def second(self, substr):
